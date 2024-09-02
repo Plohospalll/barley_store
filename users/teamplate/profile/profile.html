@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block profile %}
+ <!-- Main Content Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-5">
+                    <!-- Sidebar Start -->
+                    <div class="col-lg-3">
+                        <div class="bg-light rounded p-4">
+                            <h5 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Меню</h5>
+                            <div class="list-group list-group-flush">
+                                <a href="{% url 'user:profile' %}" class="list-group-item list-group-item-action">Главная</a>
+                                <a href="{% url 'users:booking' %}" class="list-group-item list-group-item-action">Мои заказы</a>
+                                <a href="{% url 'users:account' %}" class="list-group-item list-group-item-action">Профиль</a>
+                                <a href="{% url 'user:booking' %}" class="list-group-item list-group-item-action">Настройки</a>
+                                <a href="{% url 'user:booking' %}" class="list-group-item list-group-item-action text-danger">Выйти</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Sidebar End -->
+
+                    <!-- Content Start -->
+                    <div class="col-lg-9">
+                        {% block user_content %}
+                        <h2 class="text-primary mb-4">Добро пожаловать, {{ user.username}}!</h2>
+                        <p>Здесь вы можете управлять своими заказами, обновлять информацию профиля и изменять настройки учетной записи.</p>
+                        <!-- User Dashboard Content -->
+                            
+                        {% endblock %}
+                    </div>
+                    <!-- Content End -->
+                </div>
+            </div>
+        </div>
+        <!-- Main Content End -->
+{% endblock %}

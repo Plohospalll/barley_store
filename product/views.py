@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from product.models import Product, ProductCategory
 
 
+
 # Create your views here.
 def index(request):
     productcategory = ProductCategory.objects.all()
@@ -19,10 +20,6 @@ def menu(request):
     return render(request, 'menu.html', context)
 def about(request):
     return render(request, 'about.html')
-def booking(request):
-    return render(request, 'booking.html')
-def contact(request):
-    return render(request, 'contact.html')
 def service(request):
     return render(request, 'service.html')
 def team(request):

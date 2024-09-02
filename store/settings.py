@@ -35,7 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'product'
+    'product',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -53,7 +54,12 @@ ROOT_URLCONF = 'store.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'product','teamplate','product')],
+        'DIRS': [os.path.join(BASE_DIR, 'product','teamplate','product'),
+                 os.path.join(BASE_DIR, 'users', 'teamplate', 'booking'),
+                 os.path.join(BASE_DIR, 'users', 'teamplate', 'contact'),
+                 os.path.join(BASE_DIR, 'users', 'teamplate', 'login_singup'),
+                 os.path.join(BASE_DIR, 'users', 'teamplate', 'profile'),
+                 ],
 
         'APP_DIRS': True,
         'OPTIONS': {
@@ -120,3 +126,8 @@ MEDIA_URL = '/product_image/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# USER
+
+AUTH_USER_MODEL = 'users.User'
+

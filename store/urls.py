@@ -1,35 +1,32 @@
 """
-URL configuration for store project.
+Этот фрагмент кода представляет собой файл конфигурации URL для проекта на Django. В нем определяются правила маршрутизации URL, которые направляют запросы к соответствующим представлениям или приложениям внутри проекта. Вот подробное описание его компонентов:
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+1. Импорт модулей
+from django.contrib import admin: Импортирует административную панель Django, позволяющую управлять моделями через веб-интерфейс.
+from django.conf.urls.static import static: Импортирует функцию static, которая используется для обслуживания медиафайлов во время разработки.
+from django.urls import path, include: Импортирует функцию path для определения маршрутов и функцию include для подключения конфигураций других приложений.
+from product.views import *: Импортирует все представления из приложения product, чтобы маршрутизировать запросы на эти представления.
+2. Определение маршрутов URL
+path('admin/', admin.site.urls): Определяет маршрут для административной панели Django по адресу /admin/.
+path('', index, name='index'): Определяет корневой маршрут (/) и привязывает его к представлению index. Этот маршрут будет использоваться как главная страница сайта.
+path('store/', include('product.urls', namespace='store')): Определяет маршрут для приложения product по адресу /store/. Включает URL-ы из файла urls.py приложения product и присваивает им пространство имен store, чтобы избежать конфликтов с другими маршрутами.
+3. Обслуживание медиафайлов при разработке
+if settings.DEBUG: Если проект работает в режиме разработки (DEBUG = True), добавляются маршруты для обслуживания медиафайлов.
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT): Добавляет маршруты для медиафайлов, которые хранятся в директории, указанной в settings.MEDIA_ROOT, и доступны по адресу, указанному в settings.MEDIA_URL.
+Этот файл конфигурирует пути, обеспечивающие связь между URL-запросами и представлениями в приложении Django, а также поддерживает работу с медиафайлами в режиме разработки.
 """
+
 from django.contrib import admin
 from django.conf.urls.static import static
-from django.urls import path
+from django.urls import path, include
 from product.views import *
 from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
-    path('menu/', menu, name='menu'),
-    path('about/', about, name='about'),
-    path('booking/', booking, name='booking'),
-    path('contact/', contact, name='contact'),
-    path('service/', service, name='service'),
-    path('team/', team, name='team'),
-    path('testimonial/', testimonial, name='testimonial'),
+    path('store/', include('product.urls', namespace='store')),
+    path('user/', include('users.urls', namespace='user')),
 
 ]
 

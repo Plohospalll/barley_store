@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block personal_profile %}
+<div class="container my-5">
+    <div class="profile-container">
+        <div class="profile-header d-flex align-items-center justify-content-between mb-4 pb-4 border-bottom">
+            <div class="profile-image">
+               <img src="{% if users.image %} {% else %} {% static 'img/individual.png' %}{% endif %}" alt="User Image" class="rounded-circle" style="width: 120px; height: 120px;">
+            </div>
+            <div class="profile-details">
+                <h2>{{ user.username }}</h2>
+            </div>
+        </div>
+        <div class="profile-info mb-4">
+            <h3>Личная информация</h3>
+            <p><strong>Имя:{{ user.first_name }}</strong> </p>
+            <p><strong>Фамилия:{{ user.last_name }}</strong> </p>
+            <p><strong>Имя пользователя:{{ user.username }}</strong> </p>
+            <p><strong>Адрес электронной почты:{{ user.email }}</strong> </p>
+            
+        </div>
+        
+        <div class="btn-container d-flex justify-content-between mb-3">
+            <a href="{% url 'user:change' %}" class="btn btn-warning w-50 me-2"><i class="fas fa-edit"></i> Редактировать профиль</a>
+            <a href="{% url 'user:password' %}" class="btn btn-secondary w-50 ms-2"><i class="fas fa-key"></i> Изменить пароль</a>
+        </div>
+        <form action="{% url 'user:logout' %}" method="post">
+        {% csrf_token %}
+            <button type="submit" class="btn btn-danger w-100">
+                <i class="fas fa-sign-out-alt"></i> Выйти
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
